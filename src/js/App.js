@@ -1,19 +1,29 @@
+import React, {useState, useEffect} from 'react';
 import { ThemeProvider } from 'styled-components';
+import { token } from './utils/getAccessToken';
 import theme from './styles/theme';
 
+import Login from './containers/Login/index'
 import Header from './containers/Header'
 import Footer from './containers/Footer'
-// import HomePage from './pages/HomePage'
-import PlaylistPage from './pages/PlaylistPage'
-import SearchPage from './pages/SearchPage'
 import AppRouter from '../js/router/AppRouter'
 
 function App() {
+  const [accessToken, setAccessToken] = useState('');
+
+  useEffect(() => {
+    setAccessToken(token);
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <AppRouter />
-      <Footer />
+      {accessToken ?
+      <>
+        <Header />
+        <AppRouter />
+        <Footer />
+      </>
+    : <Login />}
     </ThemeProvider>
   );
 }

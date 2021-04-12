@@ -19,11 +19,16 @@ const HomePage = () => {
     fetchUserData();
   }, []);
 
+  const storePlaylist = (name, data) => { 
+    window.localStorage.setItem(`playlist ${name}`, JSON.stringify({name, description}));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const fetchData = async () => {
       const { data } = await createPlaylist(userId, name, description);
       console.log(data);
+      storePlaylist(name, data);
     };
     fetchData();
     setSubmitted(true);
@@ -37,42 +42,42 @@ const HomePage = () => {
   }   
 
   return (
-    <S.HomePageWrapper>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            Nome da playlist
+    <S.CreatePlaylistWrapper>
+      <h2>Criar uma playlist</h2>
+
+      <S.CreatePlaylistForm onSubmit={handleSubmit}>
+        <S.CreatePlaylistItem>
+          <label for="playlistName">Nome</label>
             <input
               type="text"
               name="playlistName"
+              id="playlistName"
               value={name}
               placeholder="Nome da sua playlist"
               required
               onChange={e => setName(e.target.value)}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Descrição da playlist
+        </S.CreatePlaylistItem>
+        <S.CreatePlaylistItem>
+          <label for="playlistDescription">Descrição</label>
             <textarea
+              id="playlistDescription"
+              placeholder="Digite algo aqui..."
               value={description}
               onChange={e => setDescription(e.target.value)}
             >
-              Digite algo aqui...
             </textarea>
-          </label>
-        </div>
-        <div>
-          <button
+        </S.CreatePlaylistItem>
+        <S.CreatePlaylistButtonWrapper>
+          <S.CreatePlaylistButton
             type="submit"
             title="criar playlist"
           >
-            Criar playlist
-          </button>
-        </div>
-      </form>
-    </S.HomePageWrapper>
+            Criar
+          </S.CreatePlaylistButton>
+        </S.CreatePlaylistButtonWrapper>
+      </S.CreatePlaylistForm>
+    </S.CreatePlaylistWrapper>
   );
 }
 

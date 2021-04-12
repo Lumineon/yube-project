@@ -5,8 +5,8 @@ export const FooterWrapper = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.blue};
   height: ${rem(60)};
+  position: fixed;
   bottom: 0;
-  position: absolute;
   width: 100%;
 `;
 

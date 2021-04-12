@@ -16,12 +16,14 @@ export const MenuContainer = styled.nav`
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(-100vw)'};
 
-  button {
+  button, a {
     font-size: ${rem(20)};
     text-transform: uppercase;
     padding: 2rem 0;
     font-weight: bold;
     transition: color 0.3s linear;
     color: white;
+    text-decoration: none;
+    text-align: center;
   }
 `;

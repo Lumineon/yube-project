@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getHashParams } from './getHashParams';
 
-const EXPIRATION_TIME = 3600 * 1000;
+const expirationTime = 3600 * 1000;
 
 const setTokenTimestamp = () => window.localStorage.setItem('spotify_token_timestamp', Date.now());
 const setLocalAccessToken = token => {
@@ -25,6 +25,13 @@ const refreshAccessToken = async () => {
   }
 };
 
+export const logout = () => {
+  window.localStorage.removeItem('spotify_token_timestamp');
+  window.localStorage.removeItem('spotify_access_token');
+  window.localStorage.removeItem('spotify_refresh_token');
+  window.location = '/';
+};
+
 export const getAccessToken = () => {
   const { error, access_token, refresh_token } = getHashParams();
 
@@ -33,9 +40,10 @@ export const getAccessToken = () => {
     refreshAccessToken();
   }
 
-  if (Date.now() - getTokenTimestamp() > EXPIRATION_TIME) {
-    console.warn('Access token has expired, refreshing...');
-    refreshAccessToken();
+  if (Date.now() - getTokenTimestamp() > expirationTime) {
+    logout();
+    console.warn('O token de acesso expirou.');
+    // refreshAccessToken();
   }
 
   const localAccessToken = getLocalAccessToken();
@@ -55,9 +63,3 @@ export const getAccessToken = () => {
 
 export const token = getAccessToken();
 
-export const logout = () => {
-  window.localStorage.removeItem('spotify_token_timestamp');
-  window.localStorage.removeItem('spotify_access_token');
-  window.localStorage.removeItem('spotify_refresh_token');
-  window.location.reload();
-};

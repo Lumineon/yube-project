@@ -17,7 +17,7 @@ export const HeaderLeft = styled.nav`
   a {
     color: white;
     text-decoration: none;
-    font-size: ${rem(20)}
+    font-size: ${rem(22)}
   }
 `;
 

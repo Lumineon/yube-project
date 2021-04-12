@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getUser } from '../../utils/getUserInfo';
+import { logout } from '../../utils/getAccessToken';
 
-const Login = (props) => {
+import * as S from './styled'
+
+const Login = () => {
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await getUser();
+      setUser(data);
+    };
+    fetchData();
+  }, []);
+
   const {
     REACT_APP_CLIENT_ID,
     REACT_APP_AUTHORIZE_URL,
@@ -15,11 +29,20 @@ const Login = (props) => {
   };
 
   return (
-    <>
-      <button type="submit" onClick={handleLogin}>
-        Login
-      </button>
-    </>
+    <S.LoginWrapper>
+      {user ?
+        <>
+          <p className="welcome">Bem vindo(a) <span>{user.display_name}</span> </p>
+          <a href="/profile">
+              Ver perfil
+          </a>
+          <button onClick={logout}>Sair</button>
+        </> : 
+        <button type="submit" onClick={handleLogin}>
+          Login
+        </button>
+      }
+    </S.LoginWrapper>
   );
 }
 

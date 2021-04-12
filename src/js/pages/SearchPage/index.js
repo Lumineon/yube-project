@@ -1,45 +1,49 @@
 import React, { useState, useEffect } from 'react';
-
-import { useFetch } from '../../hooks/useFetch';
 import axios from 'axios';
-import { token } from '../../utils/getAccessToken'
+import { token } from '../../utils/getAccessToken';
+import SearchResultsPage from '../SearchResultsPage/';
 
 import * as S from './styled';
 
-const SearchPage = (props) => {
+const SearchPage = () => {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState('');
   const [url, setUrl] = useState('')
+  const [errorMsg, setErrorMsg] = useState('');
+  
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   };
 
   useEffect(() => {
+    if (search === '') {
+      return
+    } else {
       const fetchData = async () => {
         const { data } = await axios.get(
           url, { headers });
         setResults(data);
         console.log(data)
       }
-      fetchData()
-  }, [url])
-  const [errorMsg, setErrorMsg] = useState('');
+      fetchData();
+    }
+  }, [url]) // eslint-disable-line
 
+  
   const handleInputChange = (e) => {
     const search = e.target.value;
     setSearch(search);
   };
-
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   if (search.trim() !== '') {
-  //     setErrorMsg('');
-  //     props.handleSearch(search);
-  //   } else {
-  //     setErrorMsg('Por favor digite algo!');
-  //   }
-  // };
+  
+  const handleSearch = () => {
+    if (search.trim() !== '') {
+      setUrl(`https://api.spotify.com/v1/search?q=${search}&type=track%2Cartist&limit=10`);
+      setErrorMsg('');
+    } else {
+      setErrorMsg('Por favor digite algo!');
+    }
+  };
 
   return (
     <S.SearchPageWrapper>
@@ -58,19 +62,11 @@ const SearchPage = (props) => {
             autoComplete="off"
           />
         </S.SearchFormContent>
-        <button type="submit" onClick={() => setUrl(`https://api.spotify.com/v1/search?q=${search}&type=track%2Cartist`)}>
+        <button type="submit" onClick={() => handleSearch()}>
           Buscar
         </button>
       </S.SearchFormWrapper>
-      <div>Artistas</div>
-      {results.artists ?
-        results.artists.items.map(({ id, name }) => (
-          <div key={id}>
-            <div>
-              {name}
-            </div>
-          </div>
-        )): <div>false</div>}
+      {results && <SearchResultsPage data={results}/>}
     </S.SearchPageWrapper>
   );
 };

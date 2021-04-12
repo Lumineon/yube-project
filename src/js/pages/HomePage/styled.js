@@ -4,6 +4,7 @@ import { rem } from 'polished';
 export const HomePageWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.orange};
   padding: ${rem(20)};
+  min-height: 80vh;
 `;
 export const HomePageSection = styled.div`
   margin: ${rem(30)} 0;

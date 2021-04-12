@@ -6,7 +6,7 @@ export const SearchPageWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  min-height: 60vh;
+  min-height: 80vh;
   padding: ${rem(20)};
 `;
 

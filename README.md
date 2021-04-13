@@ -6,6 +6,8 @@ Yube Player - Desafio Front End
 <p align="center">Um web app mobile baseado no spotify feito em ReactJS! Utilizou-se no processo a web api do Spotify, permitindo a criação de playlists, busca de músicas e artistas, entre várias outras funcionalidades que citarei mais adiante :)
 </p>
 
+<a align="center" href="https://yube-project.netlify.app/" target="_blank">Clique aqui para ver a aplicação rodando no Netlify</a>
+
 ## Tecnologias utilizadas
 
 - React;

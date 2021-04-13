@@ -5,7 +5,7 @@ import ProfilePage from '../pages/ProfilePage';
 import SearchPage from '../pages/SearchPage';
 import PlaylistPage from '../pages/PlaylistPage';
 import CreatePlaylistPage from '../pages/CreatePlaylistPage';
-// import NotFoundPage from '../pages/NotFoundPage';
+import NotFoundPage from '../pages/NotFoundPage';
 class AppRouter extends React.Component {
   render() {
     return (
@@ -18,7 +18,7 @@ class AppRouter extends React.Component {
             <Route path="/search" component={SearchPage} />
             <Route path="/playlists" component={PlaylistPage} />
             <Route path="/create-playlist" component={CreatePlaylistPage} />
-            {/* <Route component={NotFoundPage} /> */}
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </BrowserRouter>

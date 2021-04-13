@@ -8,10 +8,6 @@ const Menu = ({open}) => {
   return (
     <S.MenuContainer open={open}>
         <Login />
-        <button>
-          <span role="img" aria-label="Termos e condições"></span>
-          Termos e condições
-        </button>
     </S.MenuContainer>
   )
 }

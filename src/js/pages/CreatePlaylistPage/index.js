@@ -20,26 +20,28 @@ const HomePage = () => {
   }, []);
 
   const storePlaylist = (name, data) => { 
-    window.localStorage.setItem(`playlist ${name}`, JSON.stringify({name, description}));
+    window.localStorage.setItem(`playlist ${name}`, JSON.stringify(data));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const fetchData = async () => {
       const { data } = await createPlaylist(userId, name, description);
-      console.log(data);
       storePlaylist(name, data);
     };
     fetchData();
-    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(true);
+    }, 1000);
   }
 
+  
   if (submitted) {
     return <Redirect push to={{
       pathname: '/playlists',
     }}
     />
-  }   
+  }
 
   return (
     <S.CreatePlaylistWrapper>
@@ -47,7 +49,7 @@ const HomePage = () => {
 
       <S.CreatePlaylistForm onSubmit={handleSubmit}>
         <S.CreatePlaylistItem>
-          <label for="playlistName">Nome</label>
+          <label htmlFor="playlistName">Nome</label>
             <input
               type="text"
               name="playlistName"
@@ -59,7 +61,7 @@ const HomePage = () => {
             />
         </S.CreatePlaylistItem>
         <S.CreatePlaylistItem>
-          <label for="playlistDescription">Descrição</label>
+          <label htmlFor="playlistDescription">Descrição</label>
             <textarea
               id="playlistDescription"
               placeholder="Digite algo aqui..."

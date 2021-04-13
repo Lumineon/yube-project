@@ -10,7 +10,6 @@ const PlaylistsPage = () => {
     const fetchData = async () => {
       const { data } = await getPlaylists();
       setPlaylists(data);
-      console.log(data)
     };
     fetchData();
   }, []);
@@ -26,7 +25,7 @@ const PlaylistsPage = () => {
           {playlists ? (
             playlists.items.map(({ id, images, name, tracks, external_urls }, i) => (
               <S.PlaylistItem key={i}>
-                <a href={external_urls.spotify}>
+                <a href={external_urls.spotify} target="_blank" rel="noreferrer">
                 <S.PlaylistImageWrapper to={id}>
                   {images.length ? (
                     <img src={images[0].url} alt="Capa da playlist" />

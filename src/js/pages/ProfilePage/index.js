@@ -10,7 +10,6 @@ const ProfilePage = () => {
     const fetchData = async () => {
       const { data } = await getUser();
       setUser(data);
-      console.log(data)
     };
     fetchData();
   }, []);

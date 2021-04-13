@@ -24,7 +24,6 @@ const SearchPage = () => {
         const { data } = await axios.get(
           url, { headers });
         setResults(data);
-        console.log(data)
       }
       fetchData();
     }

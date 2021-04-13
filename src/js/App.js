@@ -17,13 +17,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {accessToken ?
-      <>
         <Header />
-        <AppRouter />
+        {accessToken ?
+        <>
+          <AppRouter />
+        </>
+        : <Login />}
         <Footer />
-      </>
-    : <Login />}
     </ThemeProvider>
   );
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getHashParams } from './getHashParams';
 
-const expirationTime = 3600 * 1000;
+const expirationTime = 86400 * 1000;
 
 const setTokenTimestamp = () => window.localStorage.setItem('spotify_token_timestamp', Date.now());
 const setLocalAccessToken = token => {
@@ -42,8 +42,7 @@ export const getAccessToken = () => {
 
   if (Date.now() - getTokenTimestamp() > expirationTime) {
     logout();
-    console.warn('O token de acesso expirou.');
-    // refreshAccessToken();
+    console.log('O token de acesso expirou.');
   }
 
   const localAccessToken = getLocalAccessToken();

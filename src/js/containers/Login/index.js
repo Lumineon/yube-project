@@ -15,10 +15,11 @@ const Login = () => {
     fetchData();
   }, []);
 
+  const REACT_APP_REDIRECT_URL = process.env.REACT_APP_REDIRECT_URL || 'http://localhost:3000/';
+
   const {
     REACT_APP_CLIENT_ID,
     REACT_APP_AUTHORIZE_URL,
-    REACT_APP_REDIRECT_URL
   } = process.env;
 
   const SCOPE =
